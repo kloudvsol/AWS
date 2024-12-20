@@ -1,0 +1,49 @@
+###
+EFS
+
+Introduction to AWS Elastic File System(EFS)
+
+AWS Elastic File System?
+From the aforementioned list, EFS falls under the file storage category. EFS is a file-level, fully managed, storage provided by AWS (Amazon Web Services) that can be accessed by multiple EC2 instances concurrently. Just like the AWS EBS, EFS is specially designed for high throughput and low latency applications. 
+
+How Does EFS Work?
+EFS can be created using the EC2-Instance where it will be created in a specific region and distributed across multiple availability zones for the purpose of high availability and durability. You can choose the EFS based on the I/Ops you are going to perform.
+
+# Create ECS filesystem from the webconsole 
+
+ Create an EFS from the AWS console. Choose the correct VPC (Virtual Private Cloud) and configuration that suits your use case.
+ Create one or more EC2 servers from the EC2 dashboard as needed for your use case.
+Allow the EC2 security group to access EFS. Connect To EFS from your EC2 servers. Primarily there are 2 methods of connecting to EFS from EC2 servers: Linux NFS Client: This is the old traditional method of connecting to file systems.EFS Mount Helper: This is the AWS-recommended and simpler solution to connect to EFS.
+Once you have connected to AWS EFS from your EC2 instances you will have a folder of any name (say EFS-Folder) which will hold all the files in the EFS. Any file created in this directory can be seen or edited from any EC2 instances that have access to the EFS
+`
+# check connectivity of EFS DNS
+
+[root@server ~]# nslookup fs-01267fa8dea2121f8.efs.us-east-1.amazonaws.com
+Server:         192.168.10.2
+Address:        192.168.10.2#53
+
+Non-authoritative answer:
+Name:   fs-01267fa8dea2121f8.efs.us-east-1.amazonaws.com
+Address: 192.168.10.149
+
+
+# Create Dir to mount 
+
+[root@server ~]# mkdir /myefs
+
+# Mount the EFS 
+
+[root@server ~]# sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-01267fa8dea2121f8.efs.us-east-1.amazonaws.com:/ /myefs
+
+[root@server ~]# df -h
+Filesystem                                          Size  Us                                            ed Avail Use% Mounted on
+devtmpfs                                            468M                                                 0  468M   0% /dev
+tmpfs                                               477M                                                 0  477M   0% /dev/shm
+tmpfs                                               477M  60                                            0K  476M   1% /run
+tmpfs                                               477M                                                 0  477M   0% /sys/fs/cgroup
+/dev/xvda1                                          8.0G  2.                                            5G  5.6G  31% /
+tmpfs                                                96M                                                 0   96M   0% /run/user/0
+overlay                                             8.0G  2.                                            5G  5.6G  31% /var/lib/docker/overlay2/3b87929dfd9f039f16b8a                                            ce804cf79007004637a15d7a58e9ef9d2cbdad19ecf/merged
+fs-01267fa8dea2121f8.efs.us-east-1.amazonaws.com:/  8.0E                                                 0  8.0E   0% /myefs
+
+
