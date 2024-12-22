@@ -1,0 +1,65 @@
+Auto Scaling is an Amazon Web Service it allows instances to scale when traffic or CPU load increases. Auto-scaling is a service that monitors all instances that are configured into the Auto Scaling group and ensures that loads are balanced in all instances. Depending on the load scaling group, increase the instance according to the configuration. When we created the auto-scaling group, we configured the Desired capacity, Minimum capacity, maximum capacity, and CPU utilization. If CPU utilization increases by 60% in all instances, one more instance is created, and if CPU utilization decreases by 30% in all instances, one instance is terminated. These are totally up to us; what is our requirement. If any Instance fails due to any reason, then the Scaling group maintains the Desired capacity and starts another instance.
+
+The auto-scaling group follows Horizontal Scaling. This service is very important for us nowadays because we do not need to create new instances manually and do not require manual monitoring.
+
+AWS Auto Scaling
+AWS auto scaling is used to scale up and scale down the EC2-instance by depending up on the incoming traffic. You can scale up and scale down the applications in few minutes based up on the traffic which will decrease the latency of the application to the end-users. You can integrate the AWS Auto Scaling with multiple services provided by the AWS like Amazon traffic,, Amazon DynamoDB, and Amazon Aurora. You can also decrease the cost of an application because of dynamic scaling. When there is traffic , only maximum resources are used other wise it will use minimum resources
+
+Benefits of Auto Scaling
+Dynamical scaling: AWS auto-scaling service doesn’t required any type of manual intervention it will automatically scale the application down and up by depending up on the incoming traffic.
+Pay For You Use: Because of auto scaling the resource will be utilised in the optimised way where the demand is low the resource utilisation will be low and the demand will high the resource utilisation will increase so the AWS is going to charge you only for the amount of resources you really used.
+Automatic Performance Maintenance: AWS autoscaling maintains the optimal application performance with considering the workloads it will ensures that the application is running to desired level which will decrease the latency and also the capacity will be increased by based on your application
+How AWS Auto Scaling Works?
+AWS autoscaling will scale the application based on the load of application. Instead of scaling manually AWS auto scaling will scale the application automatically when the incoming traffic is high it will scale up the application and when the traffic is low it will scale down the application.
+
+First you should choose which service or an application you want to scale then select the optimisation way like cost and performance and then keep track how the scaling is working.
+
+Steps To create Auto Scaling Launch Template
+Step 1: Click on the All Services.
+
+Step 2: Click on the EC2(Elastic Cloud Computing).
+Step 3: Scroll Down and click on the Launch Templates and click on the Create launch template
+Step 5: Configure the Group size and Scaling policies.
+
+Select as per your requirement:
+
+Desired: 4
+Minimum: 4
+Maximum: 8
+Step 6: Select the Target tracking scaling policy.
+: Click on the Create Auto Scaling Group.
+
+difference between  target scaling , step scalling simple scalling 
+
+differences between Target Scaling, Step Scaling, and Simple Scaling in Amazon EC2 Auto Scaling:
+
+Target Scaling (Target Tracking Scaling Policy)
+Definition: Automatically adjusts the number of instances in your Auto Scaling group to maintain a specified target value for a particular metric (e.g., CPU utilization).
+
+Example: If you set the target CPU utilization to 50%, Auto Scaling will add instances when the average CPU utilization exceeds 50% and remove instances when it falls below 50%.
+
+Pros: Simple to set up and ensures your instances are running at the desired capacity.
+
+Cons: Limited flexibility as it only scales out when the metric is above the target value and scales in more gradually.
+
+Step Scaling
+Definition: Scales the number of instances in your Auto Scaling group based on a set of scaling adjustments, which define the specific changes to make when a CloudWatch alarm breaches a threshold.
+
+Example: You can define that if CPU utilization reaches 70%, add 10 instances; if it reaches 80%, add 20 instances; and if it reaches 90%, add 30 instances.
+
+Pros: Provides more control over scaling actions with predefined steps based on the breach size of the alarm.
+
+Cons: Requires more configuration compared to target scaling.
+
+Simple Scaling
+Definition: Scales the number of instances in your Auto Scaling group based on a single scaling adjustment when a CloudWatch alarm breaches a threshold.
+
+Example: If CPU utilization exceeds 70%, add 10 instances; if it falls below 30%, remove 5 instances.
+
+Pros: Easier to set up with a straightforward approach to scaling.
+
+Cons: Less flexible and does not allow for multiple scaling adjustments based on different thresholds.
+
+Each scaling policy has its own use cases and benefits, depending on your specific requirements and the level of control you need over your Auto Scaling group.
+
+
