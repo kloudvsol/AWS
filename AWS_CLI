@@ -1,0 +1,84 @@
+### Refff https://www.bluematador.com/learn/aws-cli-cheatsheet 
+
+AWS Command Line Interface (CLI) is an open-source unified tool that helps you manage multiple AWS services, or automate them with scripts. AWS CLI version 2 is the latest major version. In order to access AWS services, it is required to have an AWS account, IAM credentials, and an IAM access key pair.
+
+1. Installation
+Supported operating systems are  Linux, MacOS and Windows
+
+#AWS CLI is supported on 64-bit versions of recent distributions of Linux ARM, CentOS, Fedora, Ubuntu, Amazon Linux 1, and Amazon Linux 2.
+
+$ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+# Confirm the installation with the following command
+
+[root@server ~]# aws --version
+aws-cli/2.22.26 Python/3.12.6 Linux/5.10.228-219.884.amzn2.x86_64 exe/x86_64.amzn.2
+[root@server ~]#
+#
+2. Configuring the AWS CLI
+There are a few methods to configure AWS CLI, the most common of which are:
+
+Quick configuration with aws configure 
+You can generate an access key ID and a secret access key from  AWS Console -> IAM Service. The purpose of the keys is to authenticate your AWS account and authorize what you can do according to your permission level.
+
+The configuration is stored in ~/.aws/credentials in a profile named [default]. Moreover, you can use this command to change/update existing values.
+
+
+[root@server ~]# aws configure
+AWS Access Key ID [None]: AKIAZQ3DPYYAFHZfsdwefRKMF5
+AWS Secret Access Key [None]: jgawfdfdsfaW2eKoofewf7WUD0o7TPewj7HbaG9m0Drts2tK4R
+Default region name [None]: us-east-1
+Default output format [None]: text
+
+# to list the user 
+[root@server ~]# aws sts get-caller-identity
+654654293504    arn:aws:iam::654654293504:user/myuser   AIDAZQ3DPYYAFHKOHX3BA
+[root@server ~]#
+
+
+# aws ec2 describe-instances
+RESERVATIONS    654654293504    r-02d2151b788a89296
+INSTANCES       0       x86_64  52fb26be-05bd-4cb8-adb4-ab87ceb1987a    legacy-bios
+     False   True    xen     ami-0166fe664262f664c   i-0034be42fe0c01534     t2.micro        oct-key-ppk     2024-12-31T01:46:41+00:00       Linux/UNIX      ip-192-168-10-144.ec2.internal  192.168.10.144  ec2-54-221-172-201.compute-1.amazonaws.com      54.221.172.201  /dev/xvda       ebs     True            subnet-0f02dadbdfd97eba5
+        RunInstances    2024-11-22T10:41:51+00:00       hvm     vpc-078fed5fb2e5bb5d4
+BLOCKDEVICEMAPPINGS     /dev/xvda
+EBS     2024-11-22T10:41:52+00:00       True    attached        vol-048e42ecde067bbe6
+CAPACITYRESERVATIONSPECIFICATION        open
+CPUOPTIONS      1       1
+ENCLAVEOPTIONS  False
+HIBERNATIONOPTIONS      False
+IAMINSTANCEPROFILE      arn:aws:iam::654654293504:instance-profile/my-oct-rule-for-news3        AIPAZQ3DPYYAOV2ZDO6KR
+MAINTENANCEOPTIONS      default
+
+
+# Create EC2 instance 
+
+[root@server .aws]# #aws ec2 run-instances --image-id ami-xxxxxxxx --count 1 --instance-type t2.micro --key-name MyKeyPair --security-group-ids sg-903004f8 --subnet-id subnet-6e7f829e
+[root@server .aws]#
+[root@server .aws]#
+[root@server .aws]# aws ec2 run-instances --image-id ami-0166fe664262f664c  --count 1 --instance-type t2.micro --key-name oct-key-ppk  --security-group-ids sg-0c7e3480128fc9853 --subnet-id subnet-0f02dadbdfd97eba5
+654654293504    r-04174ea5168ba36f1
+INSTANCES       0       x86_64  36f57674-34de-4f7f-86c3-f27e8c02499f    legacy-bios
+     False   True    xen     ami-0166fe664262f664c   i-08f176622b66f9853     t2.micro        oct-key-ppk     2024-12-31T03:09:28+00:00       ip-192-168-10-143.ec2.internal  192.168.10.143          /dev/xvda       ebs     True            subnet-0f02dadbdfd97eba5        hvm     vpc-078fed5fb2e5bb5d4
+CAPACITYRESERVATIONSPECIFICATION        open
+CPUOPTIONS      1       1
+ENCLAVEOPTIONS  False
+MAINTENANCEOPTIONS      default
+METADATAOPTIONS enabled disabled        1       optional        disabled        pending
+MONITORING      disabled
+NETWORKINTERFACES               interface       0a:ff:d5:39:c4:47       eni-06f77eac7b1b20bab   654654293504    ip-192-168-10-143.ec2.internal  192.168.10.143  True    in-use  subnet-0f02dadbdfd97eba5        vpc-078fed5fb2e5bb5d4
+ATTACHMENT      2024-12-31T03:09:28+00:00       eni-attach-04b8fd8e83682cc57    True
+    0       0       attaching
+GROUPS  sg-0c7e3480128fc9853    oct-sg
+OPERATOR        False
+PRIVATEIPADDRESSES      True    ip-192-168-10-143.ec2.internal  192.168.10.143
+OPERATOR        False
+PLACEMENT       us-east-1a              default
+PRIVATEDNSNAMEOPTIONS   False   False   ip-name
+SECURITYGROUPS  sg-0c7e3480128fc9853    oct-sg
+STATE   0       pending
+STATEREASON     pending pending
+[root@server .aws]#
+
