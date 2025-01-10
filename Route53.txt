@@ -1,0 +1,62 @@
+Amazon Route53
+
+Amazon Route 53 is a highly available and scalable cloud Domain Name System (DNS) web service. It is designed for developers and corporations to route the end users to Internet applications by translating human-readable names like www.geeksforgeeks.org into the numeric IP addresses like 192.0.1.1 that computers use to connect.  You cannot use Amazon Route 53 to connect your on-premises network with AWS Cloud.
+
+How Does Amazon Route53 Works?
+Amazon Route53 is an aws service than offers a DNS (Domain Name System) web service which is scalable and high available. It is essential for conversion of user friendly domain names into IP addresses so that internet communication can proceed without difficulties. The following are the some of the main features explaining on how Amazon Route 53 functions well:
+
+Domain Registration And Management: Amazon Route 53 allows users to register and maintain domain names through its user-friendly interface. Users can transfer their existing domain to the Route 53 service or can go for register a new one. Users may freely configure the DNS settings, including mail server setups (MX records), domain name aliases , and more, once they have registered.
+Global DNS Resolution: Route 53 uses a worldwidet network cast made up of many DNS servers that have been placed strategically all over the world. The IP address which matches to a domain name entered by a user in their web browser is sent back by Route 53’s DNS servers. Users can immediately access the websites and services from anywhere in the globe because of Route 53’s low latency and high-performance DNS resolution by using global network.
+Traffic Routing And Load Balancing: Users can set up load balancing and fallback setups for their applications with Route 53’s wide traffic routing capabilities. Users may distribute incoming traffic among several endpoints, such as Amazon EC2 instances, Elastic Load Balancers, or by other external resources, by utilizing capabilities like DNS-based latency routing and weighted round-robin routing.
+
+Functions Of Route53
+If a web application requires a domain name, Route53 service helps to register the name for the website (i.e domain name).
+Whenever a user enters the domain name, Route53 helps to connect the user to the website.
+If any failure is detected at any level, it automatically routes the user to a healthy resource.
+Amazon Route 53 is cost effective, secure and scalable.
+Amazon Route 53 is flexible, highly available and reliable.
+
+
+
+Methodologies Related To Route53
+> Records: Records are created to route internet traffic to the resources. They are the objects present in the hosted zone which determines how the internet traffic has to be routed for a domain name so that it finally reaches the resources. The name of each record in a hosted zone must end with the name of the hosted zone.
+> Hosted zone: When the domain name is registered, Route53 creates a public hosted zone that has the same name as the domain name. It is a collection of records that contains information about how to route traffic of its domains and all of its subdomains.
+> DNS query: It is a request for information sent from DNS client to the DNS server.
+> Alias records: Alias records helps in routing internet traffic to AWS resources like S3 bucket, Amazon CloudFront, etc. It is created at the top node of the DNS namespace.
+> Name servers: They are the servers in the DNS that translates the domain name into IP address so that internet traffic can be routed to the resources.
+> DNS failover: A method for routing the traffic from unhealthy resources to healthy resources, whenever a failure is detected.
+Routing policy: Routing policy determines how Amazon Route53 responds to queries.
+
+
+# Types Of AWS Routing Policies
+The following are the types of AWS Routing Policies:
+
+> Simple Routing Policy: It is a simple Route53 routing technique that can be used to route internet traffic to a single resource. For example; Web server to a website. Using this, routing multiple records with the same name cannot be created but multiple values ( such as multiple IP addresses ) can be specified in the same record.
+> Failover Routing Policy: Whenever a resource goes unhealthy, this policy allows to route the traffic from unhealthy resource to healthy resource.
+> Geolocation Routing Policy: This routing policy routes the traffic to resources on the basis of the geographic location of the user. Geographic locations can be specified by continent, country, or state.  For example; A person residing in France will be redirected to the website in the French language while a person from the US will be redirected to the website in the English language.
+> Geoproximity Routing Policy: It routes traffic on the basis of the geographical location of the user and the type of content user wants to access. The user can optionally shift traffic from resources at one location to resource at another location. Using this policy, a user can shift more traffic to one location compared to another location by specifying a value known as bias.
+> Latency Routing Policy: If a website has to be hosted in multiple regions then a latency based routing policy is used. To improve performance for the users, this policy helps in serving requests from the AWS region that provides the lowest latency. To use this policy, the latency records for the resources are created in multiple AWS regions.
+> Multivalue Routing Policy:  It is used when users want Route53 to return multiple values in response to DNS queries. It first checks the health of resources and then returns the multiple values only for the health resources.
+> Weighted Routing Policy:  This routing policy routes traffic to multiple resources with a single domain name according to the proportion decided by the user.
+
+
+# Amazon Route53 supported DNS Record Types
+The following are the DNS record types that are supported in Amazon Route53:
+
+> A Record ( Address Record ): It is associated with an IPv4 address that is used to point a domain or subdomain to specify a IP address.
+> AAAA Record ( IPv6 Address Record ): It is similar to A Record type but it is associated with IPv6 address. It associates the name with an IPv6 Address.
+> CNAME Record ( Canonical Name Record ): It creates an alias to Domain Name that pointing to another domain name. It used for setuping subdomains or pointing multiple domain names to the same server.
+> MX Record (Mail Exchange Record ): It specifies the mail server responses to receiving email on behalf of a domain. It is used for email routing.
+
+# Benefits And Features Of Route53
+Highly Reliable: Route53 is built using AWS’s highly available and reliable infrastructure. The distributed nature of the AWS DNS servers helps ensure a consistent ability to route the end-users to the web application.
+Scalable: It automatically scales the resources during large traffic and also handles large queries without the user’s intervention.
+Easy To Use:  Very user-friendly and easy to configure DNS settings. It can start to answer your DNS queries within minutes. Can be mapped easily to any resource.
+Health Check: Route 53 monitors the health of the application. If any failure is detected, it automatically redirects the user to a healthy resource before the customer can identify the problem.
+Flexible: You can decide which policy you want to use at given time.
+Simple: Using routing types, Route53 helps to manage traffic globally.
+Cost-Effective: Payment is done only according to the services used.
+Secure: By integrating it with IAM, the access to Amazon Route53 is secured by giving its permissions to only the authorized users.
+Mapped With Various AWS Services: It can be used to map domain names to Amazon EC2 instances, S3 buckets, and other AWS resources. 
+
+
