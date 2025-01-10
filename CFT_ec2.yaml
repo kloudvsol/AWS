@@ -1,0 +1,25 @@
+# AWS CloudFormation (CFT) template in YAML that creates an EC2 instance.
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AWS CloudFormation Template to Create an EC2 Instance
+
+Parameters:
+  KeyName:
+    Description: Name of an existing EC2 KeyPair to enable SSH access to the instance
+    Type: String
+
+Resources:
+  MyEC2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      InstanceType: 't2.micro'
+      KeyName: 'dec-ppk'
+      ImageId: 'ami-0206babbaf0d7c6c4'  # Replace with a valid AMI ID
+      SecurityGroupIds:
+        - 'sg-0528b0e1fa0e524b6'  # Replace with a valid Security Group ID
+      SubnetId: 'subnet-068750d530ae71eeb'  # Replace with a valid Subnet ID
+
+Outputs:
+  InstanceId:
+    Description: The Instance ID
+    Value: !Ref MyEC2Instance

@@ -1,0 +1,96 @@
+What is AWS Cloudformation?
+
+> Amazon Web Services(AWS) offers cloud formation as a service by which you can provision and manage complicated services offered by AWS by using the code. CloudFormation will help you to manage the infrastructure and the services in the form of a declarative way.
+
+> it is mainly used to provision the service in the AWS like EC2, S3,Autoscaling, load balancing and so on you can provision all the service automation with the Infrastructure as a code (IAC), instead of managing all of them manually you can manage with the help of AWS Cloudformation.
+
+#Features Of AWS Cloudformation
+No up-front investment
+Lowering operating cost
+Highly scalable
+Easy access
+Reducing business risks and maintenance expenses
+
+# Use Cases Of AWS Cloudformation
+> Infrastructure Provisioning: AWS Cloudformation is used to provision the infrastructure which means as an infrastructure as a code and it can be performed multiple times to get exact replicas across all the environments.
+> AutoScaling Environments: The infrastructure provisioned using AWS Cloudformation will always get provisioned with scaling environments which will help you scale up and scale down depending on the incoming load.
+> Integration With Services: Y ou can integrate the AWS Cloudformation with different services like code pipeline, Jenkins CI/CD pipeline and so on which will help to automate the deployment.
+> Deployment In Multiple Regions: You can manage the AWS cloud formation to deploy it in multiple regions which will help you in disasters.
+
+
+# Benefits of AWS Cloudformation
+> Automation: AWS CloudFormation helps to automate the process of creating, configuring, and managing AWS resources. This allows for the infrastructure to be deployed quickly, reliably, and repeatedly.
+> Consistency and standardization: With AWS CloudFormation, it is possible to create standard templates of infrastructure stacks that can be used to create identical copies of the same infrastructure. This ensures consistency in the infrastructure deployment and makes it easier to maintain.
+> Cost savings: AWS CloudFormation helps to reduce costs by allowing customers to use existing infrastructure templates and reuse them across multiple environments. This reduces the cost of designing and deploying new infrastructure.
+> Security: AWS CloudFormation helps to ensure that all AWS resources are configured securely by using security policies and rules. This helps to protect the infrastructure from potential security threats.
+> Scalability: AWS CloudFormation allows for the quick and easy scaling of resources on demand. This means that customers can quickly and easily add resources to meet their changing needs.
+
+
+# Getting Started with AWS CloudFormation
+Our template is created in JSON or YAML script. We will be discussing the JSON script in this article. JSON is a text-based format that represents structured data based onresource JavaScript object syntax. It carries the AWS resources details in the structured format according to which AWS infrastructure is created.
+
+# Structure of CloudFormation JSON Template
+> Format version: It defines the version of a template.
+> Description: Any extra description or comments about your template are written in the description of the template.
+> Metadata: It can be used to provide further information using JSON  objects.
+> Parameters: Parameters are used when you want to provide custom or dynamic values to the stack during runtime. Therefore, we can customize templates using parameters.
+> Mappings: Mapping in the JSON template helps you to map keys to a corresponding named value that you specify in a conditional parameter.
+> Conditions: Conditions are used to define if certain resources are created or when the resource’s properties are assigned to a value when the stack is created.
+> Transform: Transform helps in reusing the template components by building a simple declarative language for AWS CloudFormation.
+> Resources: In this, you can specify the properties of  AWS resources (AWS EC2 instance, S3 bucket, AWS lambda ) you want in your stack.
+> Output: The output defines the value which is generated as an output when you view your cloud Formation stack properties.
+
+
+# AWS CloudFormation (CFT) template in YAML that creates an EC2 instance. I'll also explain the structure of the template.
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  AWS CloudFormation Template to Create an EC2 Instance
+
+Parameters:
+  KeyName:
+    Description: Name of an existing EC2 KeyPair to enable SSH access to the instance
+    Type: String
+
+Resources:
+  MyEC2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      InstanceType: 't2.micro'
+      KeyName: !Ref KeyName
+      ImageId: 'ami-0abcdef1234567890'  # Replace with a valid AMI ID
+      SecurityGroupIds:
+        - 'sg-12345678'  # Replace with a valid Security Group ID
+      SubnetId: 'subnet-12345678'  # Replace with a valid Subnet ID
+
+Outputs:
+  InstanceId:
+    Description: The Instance ID
+    Value: !Ref MyEC2Instance
+
+
+Explanation of the Structure
+AWSTemplateFormatVersion: Specifies the version of the AWS CloudFormation template format you're using. The format version is not related to the API or WSDL version.
+
+Description: A brief description of what the template does.
+
+Parameters: Defines input values that can be passed to the template when you create a stack. Here, we have a parameter KeyName for the EC2 KeyPair name to enable SSH access to the instance.
+
+Resources: Declares the AWS resources that you want to create in the stack. Each resource has:
+
+Type: The AWS resource type. Here, it's AWS::EC2::Instance.
+
+Properties: A set of properties for the resource. For the EC2 instance, we specify:
+
+InstanceType: The type of instance (e.g., t2.micro).
+
+KeyName: The name of an existing EC2 KeyPair. The !Ref function returns the value of the specified parameter.
+
+ImageId: The ID of the AMI to use for the instance.
+
+SecurityGroupIds: An array of security group IDs.
+
+SubnetId: The ID of the subnet to launch the instance in.
+
+Outputs: Declares output values that you can import into other stacks or return in response to API calls. Here, we return the instance ID of the created EC2 instance.
+
