@@ -2,8 +2,8 @@
 yum install httpd -y 
 systemctl start httpd ;
 systemctl enable httpd ;
-wget https://www.free-css.com/assets/files/free-css-templates/download/page296/carvilla.zip ;
-unzip carvilla.zip
-cp -r carvilla-v1.0/* /var/www/html/
+wget https://templatemo.com/tm-zip-files-2020/templatemo_584_pod_talk.ziphi   ;
+unzip templatemo_584_pod_talk.zip
+cp -r templatemo_584_pod_talk/* /var/www/html/
 systemctl restart httpd ;
 
